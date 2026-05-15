@@ -2,6 +2,14 @@
 
 一个面向好友娱乐的浏览器派对游戏原型：玩家创建或加入房间，选择角色和道具后参与多轮暗仓竞拍，最终由最高价玩家清点藏品并结算收益。
 
+## 目前实现功能
+
+1）核心玩法：经过多轮出价，最终价高者得；
+2）角色系统：包含老师，赌神，女星，已创建模板，可通过后台进行拓展；
+3）地图系统：分为五档地图，已创建模板，可通过后台进行拓展；
+4）藏品系统：藏品可进行自定义，已创建模板，可通过后台进行拓展；
+
+
 ## 快速开始
 
 需要 Node.js 18 或更新版本。
@@ -27,7 +35,7 @@ npm run admin
 或双击：
 
 - Windows：`start-admin-windows.cmd`
-- Linux：`start-admin-linux.sh` 或 `start-admin-linux.desktop`
+- Linux：`start-admin-linux.sh` 
 - macOS：`start-admin-macos.command`
 
 后台地址：`http://localhost:3000/admin.html`
@@ -75,23 +83,6 @@ src/                         Node.js 服务端
 
 藏品贴图统一放在 `public/assets/item-textures/custom/`。没有贴图时会使用 `public/assets/item-textures/placeholders/` 下对应尺寸的纯色占位图。
 
-## GitHub 注意事项
-
-`.gitignore` 已经排除了：
-
-- `data/accounts.json`
-- `dist/`
-- `.env`
-- `node_modules/`
-- 旧备份目录
-
-上传前建议运行：
-
-```bash
-npm run check
-npm run selftest
-npm run package
-```
 
 ## Docker 部署
 
