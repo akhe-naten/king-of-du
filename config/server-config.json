@@ -1,0 +1,11 @@
+{
+  "bidRounds": 4,
+  "startingCash": 900000,
+  "maxBid": 999999999,
+  "bidStep": 10000,
+  "warehouseCols": 15,
+  "warehouseFillPercent": 92,
+  "skillRevealCount": 2,
+  "disconnectTimeoutSeconds": 10,
+  "settlementRevealMs": 180
+}

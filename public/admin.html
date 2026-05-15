@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>仓库拍卖夜 后台控制台</title>
+    <link rel="stylesheet" href="css/admin.css">
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="admin-hero">
+        <div>
+          <p class="eyebrow">Server Console</p>
+          <h1>仓库拍卖夜后台</h1>
+        </div>
+        <div class="hero-actions">
+          <a class="ghost-btn" href="/" target="_blank" rel="noreferrer">打开玩家页</a>
+          <button id="refreshBtn" class="primary-btn" type="button">刷新</button>
+        </div>
+      </header>
+
+      <section class="status-grid">
+        <article class="status-card">
+          <span>服务状态</span>
+          <strong id="serverState">连接中</strong>
+        </article>
+        <article class="status-card">
+          <span>房间数</span>
+          <strong id="roomCount">0</strong>
+        </article>
+        <article class="status-card">
+          <span>端口</span>
+          <strong id="serverPort">3000</strong>
+        </article>
+        <article class="status-card wide">
+          <span>访问地址</span>
+          <div id="addressList" class="address-list"></div>
+        </article>
+      </section>
+
+      <section class="panel config-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Rules</p>
+            <h2>规则配置</h2>
+          </div>
+          <div class="config-actions">
+            <span id="configStatus">影响新开对局</span>
+            <button id="resetConfigBtn" class="ghost-btn" type="button">恢复默认</button>
+            <button id="saveConfigBtn" class="primary-btn" type="button">保存配置</button>
+          </div>
+        </div>
+        <form id="configForm" class="config-form">
+          <label><span>竞价轮数</span><input name="bidRounds" type="number" min="1" max="12"></label>
+          <label><span>初始资金</span><input name="startingCash" type="number" min="1000" max="999999999" step="1000"></label>
+          <label><span>最高出价</span><input name="maxBid" type="number" min="1000" max="999999999" step="1000"></label>
+          <label><span>按钮增减金额</span><input name="bidStep" type="number" min="1" max="10000000" step="1000"></label>
+          <label><span>固定列数</span><input name="warehouseCols" type="number" value="15" min="15" max="15" readonly></label>
+          <label><span>目标填充率 %</span><input name="warehouseFillPercent" type="number" min="30" max="100"></label>
+          <label><span>技能揭示件数</span><input name="skillRevealCount" type="number" min="1" max="12"></label>
+          <label><span>断线接管秒数</span><input name="disconnectTimeoutSeconds" type="number" min="3" max="300"></label>
+          <label><span>清点间隔毫秒</span><input name="settlementRevealMs" type="number" min="180" max="5000" step="20"></label>
+        </form>
+      </section>
+
+      <section class="panel loot-config-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Loot Data</p>
+            <h2>藏品与地图配置</h2>
+          </div>
+          <div class="config-actions">
+            <span id="lootConfigStatus">可编辑多项后统一保存</span>
+            <button id="reloadLootConfigBtn" class="ghost-btn" type="button">重新载入</button>
+            <button id="saveLootConfigBtn" class="primary-btn" type="button">保存藏品配置</button>
+          </div>
+        </div>
+        <div class="loot-config-meta" id="lootConfigMeta">读取中</div>
+        <div class="loot-gui">
+          <aside class="loot-browser">
+            <div class="loot-browser-tools">
+              <input id="lootSearchInput" type="search" placeholder="&#25628;&#32034;&#34255;&#21697;">
+              <button id="addLootItemBtn" class="ghost-btn" type="button">&#26032;&#22686;&#34255;&#21697;</button>
+            </div>
+            <div id="lootItemList" class="loot-item-list"></div>
+          </aside>
+          <form id="lootItemForm" class="loot-item-form">
+            <label><span>ID</span><input name="id" type="text" required></label>
+            <label><span>&#21517;&#31216;</span><input name="name" type="text" required></label>
+            <label><span>&#23485;</span><input name="w" type="number" min="1" max="8"></label>
+            <label><span>&#39640;</span><input name="h" type="number" min="1" max="8"></label>
+            <label><span>&#31232;&#26377;&#24230;</span><select name="rarity"><option value="junk">&#28784;&#33394;</option><option value="common">&#30333;&#33394;</option><option value="green">&#32511;&#33394;</option><option value="blue">&#34013;&#33394;</option><option value="gold">&#37329;&#33394;</option><option value="red">&#32418;&#33394;</option></select></label>
+            <label><span>&#22522;&#30784;&#20540;</span><input name="value" type="number" min="1" max="999999999"></label>
+            <label class="wide"><span>&#26631;&#31614;&#65292;&#29992;&#36887;&#21495;&#20998;&#38548;</span><input name="tags" type="text"></label>
+            <label class="wide"><span>&#36148;&#22270;&#36335;&#24452;</span><input name="image" type="text" placeholder="assets/item-textures/custom/item.png"></label>
+            <label class="wide"><span>&#19978;&#20256;&#36148;&#22270;</span><input id="lootImageUpload" type="file" accept="image/png,image/jpeg"></label>
+            <div class="loot-form-actions"><button id="applyLootItemBtn" class="primary-btn" type="button">&#24212;&#29992;&#21040;&#32531;&#23384;</button><button id="deleteLootItemBtn" class="ghost-btn danger-btn" type="button">&#21024;&#38500;&#34255;&#21697;</button></div>
+          </form>
+          <section class="loot-preview-panel"><div id="lootPreview" class="loot-preview"></div><span id="lootPreviewMeta">&#36873;&#25321;&#34255;&#21697;&#21518;&#39044;&#35272;</span></section>
+        </div>
+        <div class="loot-config-editors">
+          <label>
+            <span>地图 mapSettings JSON</span>
+            <textarea id="mapConfigEditor" spellcheck="false"></textarea>
+          </label>
+          <label>
+            <span>藏品 items JSON</span>
+            <textarea id="itemConfigEditor" spellcheck="false"></textarea>
+          </label>
+        </div>
+        <details class="advanced-config">
+          <summary>暗仓模板 warehouses JSON</summary>
+          <textarea id="warehouseConfigEditor" spellcheck="false"></textarea>
+        </details>
+      </section>
+
+      <section class="panel role-config-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Role Data</p>
+            <h2>&#35282;&#33394;&#31995;&#32479;&#37197;&#32622;</h2>
+          </div>
+          <div class="config-actions">
+            <span id="roleConfigStatus">&#21487;&#35270;&#21270;&#32534;&#36753;&#65292;&#20445;&#23384;&#21518;&#26032;&#24320;&#23545;&#23616;&#29983;&#25928;</span>
+            <button id="reloadRoleConfigBtn" class="ghost-btn" type="button">&#37325;&#26032;&#36733;&#20837;</button>
+            <button id="saveRoleConfigBtn" class="primary-btn" type="button">&#20445;&#23384;&#35282;&#33394;&#37197;&#32622;</button>
+          </div>
+        </div>
+        <div class="role-gui">
+          <aside class="role-browser">
+            <button id="addRoleBtn" class="ghost-btn" type="button">&#26032;&#22686;&#35282;&#33394;</button>
+            <div id="roleItemList" class="role-item-list"></div>
+          </aside>
+          <form id="roleForm" class="role-form">
+            <label><span>ID</span><input name="id" type="text" required></label>
+            <label><span>&#21517;&#31216;</span><input name="name" type="text" required></label>
+            <label><span>&#31616;&#31216;</span><input name="shortName" type="text" maxlength="2"></label>
+            <label><span>AI&#20986;&#20215;&#20542;&#21521;</span><input name="trait" type="number" min="0.2" max="3" step="0.01" title="1&#61;&#26631;&#20934;&#65292;&#22823;&#20110;1&#26356;&#28608;&#36827;&#65292;&#23567;&#20110;1&#26356;&#20445;&#23432;"></label>
+            <label class="wide"><span>&#35828;&#26126;</span><input name="summary" type="text"></label>
+            <label class="wide"><span>&#31435;&#32472;</span><input name="portrait" type="text"></label>
+            <label><span>&#19978;&#20256;&#31435;&#32472;</span><input id="rolePortraitUpload" type="file" accept="image/png,image/jpeg"></label>
+            <label class="wide"><span>&#22836;&#20687;</span><input name="avatar" type="text"></label>
+            <label><span>&#19978;&#20256;&#22836;&#20687;</span><input id="roleAvatarUpload" type="file" accept="image/png,image/jpeg"></label>
+            <label class="wide"><span>&#24320;&#22987;&#35821;&#38899;</span><input name="voiceStart" type="text"></label>
+            <label class="wide"><span>&#25216;&#33021;&#35821;&#38899;</span><input name="voiceSkill" type="text"></label>
+            <label class="wide"><span>&#33719;&#25293;&#35821;&#38899;</span><input name="voiceAuctionWin" type="text"></label>
+            <label class="wide"><span>&#33719;&#21033;&#35821;&#38899;</span><input name="voiceProfit" type="text"></label>
+            <label class="wide"><span>&#22833;&#36133;&#35821;&#38899;</span><input name="voiceLoss" type="text"></label>
+            <label class="wide"><span>&#25216;&#33021;&#33050;&#26412;</span><input name="skillScript" type="text" placeholder="role-skills/role-id.js"></label>
+            <div class="role-form-actions"><button id="applyRoleBtn" class="primary-btn" type="button">&#24212;&#29992;&#21040;&#32531;&#23384;</button><button id="deleteRoleBtn" class="ghost-btn danger-btn" type="button">&#21024;&#38500;&#35282;&#33394;</button></div>
+          </form>
+          <section class="role-preview-panel">
+            <img id="rolePortraitPreview" alt="">
+            <div><img id="roleAvatarPreview" alt=""><strong id="rolePreviewName">-</strong><span id="rolePreviewSummary">-</span></div>
+          </section>
+        </div>
+        <details class="advanced-config">
+          <summary>&#35282;&#33394; roles JSON</summary>
+          <textarea id="roleConfigEditor" spellcheck="false"></textarea>
+        </details>
+      </section>
+
+      <section class="admin-layout">
+        <aside class="panel room-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Rooms</p>
+              <h2>房间列表</h2>
+            </div>
+            <span id="lastUpdated">未刷新</span>
+          </div>
+          <div id="roomList" class="room-list"></div>
+        </aside>
+
+        <section class="panel detail-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Room Detail</p>
+              <h2 id="detailTitle">选择一个房间</h2>
+            </div>
+            <span id="detailPhase">等待</span>
+          </div>
+
+          <div id="emptyDetail" class="empty-state">
+            <strong>还没有房间被选中</strong>
+            <span>创建或加入好友房后，这里会显示玩家、报价和结算状态。</span>
+          </div>
+
+          <div id="detailBody" class="detail-body hidden">
+            <div class="metric-strip">
+              <div><span>阶段</span><b id="metricPhase">-</b></div>
+              <div><span>玩家</span><b id="metricPlayers">0/4</b></div>
+              <div><span>轮次</span><b id="metricRound">-</b></div>
+              <div><span>暗仓价值</span><b id="metricValue">-</b></div>
+            </div>
+
+            <section class="sub-panel">
+              <div class="sub-head">
+                <h3>玩家</h3>
+                <span id="playerSummary">0 人</span>
+              </div>
+              <div id="playerTable" class="player-table"></div>
+            </section>
+
+            <section class="sub-grid">
+              <article class="sub-panel">
+                <div class="sub-head">
+                  <h3>对局</h3>
+                  <span id="roundResultText">暂无结果</span>
+                </div>
+                <div id="gameInfo" class="info-list"></div>
+              </article>
+
+              <article class="sub-panel">
+                <div class="sub-head">
+                  <h3>最近事件</h3>
+                  <span>最新 30 条</span>
+                </div>
+                <div id="actionLog" class="action-log"></div>
+              </article>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

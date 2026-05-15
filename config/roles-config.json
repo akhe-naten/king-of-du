@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "roles": [
+    {
+      "id": "god-gambler",
+      "name": "赌神",
+      "role": "赌神",
+      "shortName": "赌",
+      "trait": 1.08,
+      "summary": "对局开始时展示所有藏品的轮廓。",
+      "portrait": "assets/characters/custom/god-gambler-portrait.png",
+      "avatar": "assets/characters/custom/god-gambler-avatar.png",
+      "voice": "assets/audio/roles/god-gambler.wav",
+      "voices": {
+        "start": "assets/audio/roles/god-gambler.wav",
+        "skill": "assets/audio/roles/god-gambler-skill.wav",
+        "auctionWin": "assets/audio/events/auction-win.wav",
+        "profit": "assets/audio/events/settlement-profit.wav",
+        "loss": "assets/audio/events/settlement-loss.wav"
+      },
+      "skillScript": "role-skills/god-gambler.js"
+    },
+    {
+      "id": "teacher",
+      "name": "老师",
+      "role": "老师",
+      "shortName": "师",
+      "trait": 0.98,
+      "summary": "每轮出价前，随机展示两个藏品的轮廓和稀有度。",
+      "portrait": "assets/characters/custom/teacher-portrait.png",
+      "avatar": "assets/characters/custom/teacher-avatar.png",
+      "voice": "assets/audio/roles/teacher.wav",
+      "voices": {
+        "start": "assets/audio/roles/teacher.wav",
+        "skill": "assets/audio/roles/老师，点名.wav",
+        "auctionWin": "assets/audio/events/老师，实验.wav",
+        "profit": "assets/audio/events/老师，科学的结论.wav",
+        "loss": "assets/audio/events/老师，失误.wav"
+      },
+      "skillScript": "role-skills/teacher.js"
+    },
+    {
+      "id": "star",
+      "name": "女星",
+      "role": "女星",
+      "shortName": "星",
+      "trait": 1.02,
+      "summary": "开局展示五件藏品其中一格的稀有度，之后每回合再展示两件未展示藏品其中一格的稀有度。",
+      "portrait": "assets/characters/custom/star-portrait.png",
+      "avatar": "assets/characters/custom/star-avatar.png",
+      "voice": "assets/audio/roles/star.wav",
+      "voices": {
+        "start": "assets/audio/roles/star.wav",
+        "skill": "assets/audio/roles/star-skill.wav",
+        "auctionWin": "assets/audio/events/auction-win.wav",
+        "profit": "assets/audio/events/settlement-profit.wav",
+        "loss": "assets/audio/events/settlement-loss.wav"
+      },
+      "skillScript": "role-skills/star.js"
+    }
+  ]
+}

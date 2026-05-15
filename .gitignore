@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+npm-debug.log*
+data/accounts.json
+data/*.tmp
+备份/
+*.zip
+.DS_Store
+Thumbs.db

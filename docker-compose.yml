@@ -1,0 +1,32 @@
+services:
+  king-of-du:
+    build:
+      context: .
+    image: king-of-du:latest
+    container_name: king-of-du
+    restart: unless-stopped
+    ports:
+      - "${PUBLIC_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      KWA_DATA_DIR: /app/data
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN before starting the container}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-60000}
+      AUTH_RATE_LIMIT: ${AUTH_RATE_LIMIT:-20}
+      ACTION_RATE_LIMIT: ${ACTION_RATE_LIMIT:-180}
+      JSON_BODY_LIMIT: ${JSON_BODY_LIMIT:-1048576}
+    volumes:
+      - king-of-du-data:/app/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  king-of-du-data:
+    name: king-of-du-data

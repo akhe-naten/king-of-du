@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>仓库拍卖夜 Web 原型</title>
+    <link rel="stylesheet" href="css/styles.css?v=20260515-popover-fix">
+  </head>
+  <body>
+    <section id="authPage" class="room-page">
+      <div class="room-card">
+        <p class="eyebrow">账户登录 · 浏览器联机</p>
+        <h1>仓库拍卖夜</h1>
+        <p class="room-copy">先登录账户，资金、仓库和对局收益会保存到本地账户数据。</p>
+
+        <div class="room-status-card">
+          <strong id="serverStatus">检测服务器中</strong>
+          <span id="roomStatus">启动 `npm start` 后可创建或加入好友房。</span>
+        </div>
+
+        <div class="auth-panel">
+          <div class="panel-title">
+            <h2>账户</h2>
+            <span id="accountStatus">未登录</span>
+          </div>
+          <div id="authForm" class="auth-form">
+            <label>
+              <span>账号</span>
+              <input id="authUsername" type="text" maxlength="20" autocomplete="username" placeholder="3-20 位字母数字">
+            </label>
+            <label>
+              <span>密码</span>
+              <input id="authPassword" type="password" maxlength="64" autocomplete="current-password" placeholder="至少 6 位">
+            </label>
+            <label>
+              <span>昵称</span>
+              <input id="authDisplayName" type="text" maxlength="18" autocomplete="nickname" placeholder="注册时可填">
+            </label>
+            <button id="loginBtn" class="small-btn" type="button">登录</button>
+            <button id="registerBtn" class="small-btn" type="button">注册</button>
+          </div>
+          <div id="accountCard" class="account-card hidden">
+            <div>
+              <strong id="accountName">账户</strong>
+              <span id="accountMeta">现金 0 · 仓库 0</span>
+            </div>
+            <button id="accountWarehouseBtn" class="small-btn" type="button">个人仓库</button>
+            <button id="authContinueBtn" class="small-btn start-btn" type="button">继续</button>
+            <button id="logoutBtn" class="small-btn" type="button">退出</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="loadoutPage" class="room-page hidden">
+      <div class="room-card">
+        <p class="eyebrow">出战准备 · 角色与道具</p>
+        <h1>选择出战配置</h1>
+        <p class="room-copy">角色技能会自动触发。道具选择暂未完成，先保留入口和布局。</p>
+        <div class="role-panel">
+          <div class="panel-title">
+            <h2>角色选择</h2>
+            <span id="selectedRoleHint">选择本局自动技能</span>
+          </div>
+          <div id="roleChoices" class="role-choices"></div>
+        </div>
+
+        <div class="tool-loadout-panel">
+          <div class="panel-title">
+            <h2>道具选择</h2>
+            <span>暂未完成</span>
+          </div>
+          <div id="toolLoadoutGrid" class="tool-loadout-grid">
+            <button class="tool-loadout-card selected" type="button" disabled>
+              <strong>仓库扫描仪</strong>
+              <span>默认携带。每轮仍可手动使用一次。</span>
+            </button>
+            <button class="tool-loadout-card" type="button" disabled>
+              <strong>预留道具槽</strong>
+              <span>后续接入不同道具配置。</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button id="loadoutBackBtn" class="small-btn" type="button">返回登录</button>
+          <button id="loadoutNextBtn" class="bid-btn" type="button">进入房间</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="roomPage" class="room-page hidden">
+      <div class="room-card">
+        <p class="eyebrow">好友房 · 浏览器联机</p>
+        <h1>房间大厅</h1>
+        <p class="room-copy">创建房间或输入房间号加入。房主点击开始对局后，所有玩家进入同一个可配置暗仓竞价局。</p>
+
+        <div class="room-status-card">
+          <strong>当前配置</strong>
+          <span id="roomLoadoutHint">未选择角色</span>
+        </div>
+
+        <div class="map-panel">
+          <div class="panel-title">
+            <h2>地图门票</h2>
+            <span id="selectedMapHint">选择本局收益档位</span>
+          </div>
+          <div id="mapChoices" class="map-choices"></div>
+        </div>
+
+        <div class="room-actions">
+          <label>
+            <span>昵称</span>
+            <input id="playerNameInput" type="text" maxlength="18" value="房主" aria-label="昵称">
+          </label>
+          <button id="createRoomBtn" class="bid-btn" type="button">创建房间</button>
+          <label>
+            <span>房间号</span>
+            <input id="roomCodeInput" type="text" maxlength="8" placeholder="例如 A1B2C3" aria-label="房间号">
+          </label>
+          <button id="joinRoomBtn" class="small-btn" type="button">加入房间</button>
+          <button id="startRoomBtn" class="small-btn start-btn" type="button">开始对局</button>
+        </div>
+
+        <div class="lobby-board">
+          <div class="panel-title">
+            <h2>房间玩家</h2>
+            <span id="lobbyRoomCode">未进入房间</span>
+          </div>
+          <div id="lobbyPlayers" class="lobby-players"></div>
+        </div>
+
+        <div class="step-actions">
+          <button id="roomBackBtn" class="small-btn" type="button">返回配置</button>
+        </div>
+      </div>
+    </section>
+
+    <main id="gamePage" class="game-shell hidden">
+      <section class="hud">
+        <div>
+          <p class="eyebrow">固定 4 人 · 暗仓竞价</p>
+          <h1>仓库拍卖夜</h1>
+        </div>
+        <div class="wallet">
+          <span>门票 <b id="coinLabel">0</b></span>
+          <span>资金 <b id="cashLabel">900,000</b></span>
+          <button id="newGameBtn" class="icon-btn" type="button" title="重新开局" aria-label="重新开局">↻</button>
+        </div>
+      </section>
+
+      <section class="auction-layout">
+        <aside class="players-panel">
+          <div class="panel-title">
+            <h2>竞拍席</h2>
+            <span id="roundLabel">第 1 / 6 轮</span>
+          </div>
+          <div id="players" class="players"></div>
+        </aside>
+
+        <section class="action-panel">
+          <div class="lot-header">
+            <div>
+              <p class="eyebrow" id="lotType">战利品仓库</p>
+              <h2 id="lotName">仓库装载中</h2>
+            </div>
+            <div class="timer">
+              <span id="timerLabel">6</span>
+              <small>剩余轮次</small>
+            </div>
+          </div>
+
+          <div id="intelFeed" class="intel-feed"></div>
+
+          <div class="bid-strip">
+            <div class="bid-tools-row">
+              <button id="qualityBtn" class="tool-btn" type="button">使用道具</button>
+              <div id="bidRoundNotice" class="bid-notice">本轮倍率成交线 x2.0</div>
+            </div>
+
+            <div class="bid-console">
+              <div class="bid-keypad" aria-label="报价数字键盘">
+                <button type="button" data-bid-key="1">1</button>
+                <button type="button" data-bid-key="2">2</button>
+                <button type="button" data-bid-key="3">3</button>
+                <button id="bidBackspace" type="button" aria-label="删除一位">⌫</button>
+                <button type="button" data-bid-key="4">4</button>
+                <button type="button" data-bid-key="5">5</button>
+                <button type="button" data-bid-key="6">6</button>
+                <button id="bidMultiplier" type="button">x2.0</button>
+                <button type="button" data-bid-key="7">7</button>
+                <button type="button" data-bid-key="8">8</button>
+                <button type="button" data-bid-key="9">9</button>
+                <button id="bidLastRound" type="button">上轮出价</button>
+                <button type="button" data-bid-key="0">0</button>
+                <button type="button" data-bid-key="00">00</button>
+                <button type="button" data-bid-key="000">000</button>
+                <button id="bidClear" type="button">归零</button>
+              </div>
+
+              <div class="bid-terminal">
+                <div class="bid-range" id="bidRangeLabel">请输入竞拍价格：0 --- 999,999,999</div>
+                <input id="bidInput" type="number" min="0" max="999999999" step="1" value="120000" aria-label="竞拍价格">
+                <div class="bid-meta">
+                  <span>上轮最高 <b id="bidPreviousLabel">0</b></span>
+                  <span>第二名参考 <b id="bidRunnerLabel">0</b></span>
+                </div>
+                <button id="bidBtn" class="bid-btn" type="button">确认出价</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="roundResult" class="round-result" aria-live="polite"></div>
+        </section>
+
+        <aside class="warehouse-panel">
+          <div class="warehouse-title">
+            <h2>暗仓行列规模</h2>
+            <button id="pediaBtn" class="small-btn" type="button">藏品百科</button>
+          </div>
+          <div id="warehouseGrid" class="warehouse-grid"></div>
+          <div class="estimate-bar">
+            <span>当前预估金额：</span>
+            <b id="estimateLabel">0K</b>
+          </div>
+        </aside>
+      </section>
+
+      <section class="collection-panel">
+        <div class="panel-title">
+          <h2>你的仓库收获</h2>
+          <span id="scoreLabel">资产 900,000</span>
+        </div>
+        <div id="collection" class="collection"></div>
+      </section>
+    </main>
+
+    <main id="settlementPage" class="settlement-page hidden">
+      <section class="settlement-stage">
+        <aside class="settlement-summary">
+          <div>
+            <p class="eyebrow">探险家座舰资料库</p>
+            <h1>对局结束</h1>
+            <span id="settlementLotName" class="settlement-lot-name">仓库清点中</span>
+          </div>
+
+          <div class="winner-strip">
+            <div id="settlementWinnerAvatar" class="settlement-avatar">?</div>
+            <div>
+              <span>拍得玩家</span>
+              <strong id="settlementWinnerName">等待结算</strong>
+              <small id="settlementWinnerId">ID UNKNOWN</small>
+            </div>
+          </div>
+
+          <div class="settlement-money">
+            <span>最终竞拍价格</span>
+            <b id="settleCost">0</b>
+            <span>战利品价格</span>
+            <b id="settleValue">0</b>
+            <span>未拍中补贴</span>
+            <b id="settleBonus">0</b>
+            <span>利润</span>
+            <b id="profitChip" class="settlement-profit">0</b>
+          </div>
+
+          <div class="settlement-progress">
+            <span>清点进度</span>
+            <strong id="settleCount">0 / 0</strong>
+            <div class="progress-track"><i id="settlementProgressBar"></i></div>
+          </div>
+
+          <div id="settlementList" class="settlement-ticker"></div>
+          <div class="settlement-actions">
+            <button id="settlementSkipBtn" class="small-btn settlement-continue" type="button">跳过清点</button>
+            <button id="settlementConfirmBtn" class="bid-btn settlement-continue" type="button" disabled>确认结算</button>
+            <button id="settlementWarehouseBtn" class="bid-btn settlement-continue" type="button" disabled>进入仓库</button>
+            <button id="settlementNextBtn" class="small-btn settlement-continue" type="button" disabled>继续下一局</button>
+            <button id="settlementLobbyBtn" class="small-btn settlement-continue" type="button" disabled>返回大厅</button>
+          </div>
+        </aside>
+
+        <section class="settlement-warehouse-panel">
+          <div class="settlement-warehouse-title">
+            <div>
+              <p class="eyebrow">仓库格子数约 <span id="settlementGridSize">0</span> 格</p>
+              <h2 id="settlementTitle">战利品</h2>
+            </div>
+            <button id="settlementPediaBtn" class="small-btn" type="button">藏品百科</button>
+          </div>
+          <div class="settlement-grid-shell">
+            <div id="settlementWarehouseGrid" class="warehouse-grid settlement-warehouse-grid"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <main id="accountWarehousePage" class="account-warehouse-page hidden">
+      <header class="warehouse-appbar">
+        <div>
+          <p class="eyebrow">个人资产 · 无限仓库</p>
+          <h1>仓库</h1>
+        </div>
+        <div class="warehouse-account-strip">
+          <span id="warehouseCashLabel">现金 0</span>
+          <span id="warehouseValueLabel">仓库估值 0</span>
+          <button id="warehouseBackBtn" class="small-btn" type="button">返回大厅</button>
+        </div>
+      </header>
+
+      <section class="warehouse-workbench">
+        <aside class="display-case">
+          <div class="panel-title">
+            <h2>展示架</h2>
+            <span id="displayCaseHint">0 / 小时</span>
+          </div>
+          <div id="displayShelves" class="display-shelves"></div>
+          <div class="display-footer">
+            <button id="clearDisplayBtn" class="small-btn" type="button">清空展示</button>
+            <span>展示收益 0 / 小时</span>
+          </div>
+        </aside>
+
+        <section class="personal-storage">
+          <div class="storage-title">
+            <div>
+              <p class="eyebrow">主仓库</p>
+              <h2 id="storageCountLabel">0 件藏品</h2>
+            </div>
+            <div class="storage-tools">
+              <input id="storageSearch" type="search" placeholder="搜索藏品、稀有度或来源">
+              <select id="storageFilter" aria-label="筛选仓库">
+                <option value="all">全部</option>
+                <option value="displayed">已展出</option>
+                <option value="locked">已上锁</option>
+                <option value="sellable">可出售</option>
+              </select>
+              <div class="storage-batch-actions" aria-label="批量操作">
+                <button id="batchLockBtn" class="small-btn" type="button">批量上锁</button>
+                <button id="batchUnlockBtn" class="small-btn" type="button">批量解锁</button>
+                <button id="batchUndisplayBtn" class="small-btn" type="button">批量下架</button>
+                <button id="batchSellBtn" class="small-btn danger" type="button">出售筛选</button>
+              </div>
+            </div>
+          </div>
+          <div id="personalStorageGrid" class="personal-storage-grid"></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="itemPopover" class="item-popover hidden"></div>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-box">
+        <h2 id="modalTitle">最终结算</h2>
+        <div id="modalBody"></div>
+        <button id="modalBtn" class="bid-btn" type="button">关闭</button>
+      </div>
+    </div>
+
+    <script src="js/app.js?v=20260515-popover-fix"></script>
+  </body>
+</html>

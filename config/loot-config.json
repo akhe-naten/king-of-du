@@ -1,0 +1,1420 @@
+{
+  "version": 1,
+  "fieldNotes": {
+    "items": "??????????? id ???w/h ??????",
+    "rarity": "稀有度可选 junk/common/green/blue/gold/red，越靠后越稀有。",
+    "value": "基础价值；生成暗仓时会按品相随机浮动为最终价格。",
+    "tags": "中文标签用于地图、暗仓模板和藏品匹配；一件藏品可以有多个标签。",
+    "mapSettings": "地图档位配置。ticketCost 是门票；resourceRoll 是后台资源预算抽取表；rarityWeights 与 categoryWeights 控制稀有度和品类权重。"
+  },
+  "rarityNotes": {
+    "junk": "灰色低价杂物",
+    "common": "白色普通物",
+    "green": "绿色可疑收益",
+    "blue": "蓝色稳定收益",
+    "gold": "金色高价值",
+    "red": "红色爆点藏品"
+  },
+  "mapSettings": [
+    {
+      "id": "shipwreck-hold",
+      "tier": 1,
+      "name": "快递站",
+      "hint": "低门槛旧货地图，白绿蓝物品多，偶尔混入小件高价藏品。",
+      "ticketCost": 5000,
+      "resourceRoll": [
+        1200,
+        2550,
+        3800,
+        6000
+      ],
+      "rarityWeights": {
+        "junk": 80,
+        "common": 200,
+        "green": 240,
+        "blue": 240,
+        "gold": 120,
+        "red": 70
+      },
+      "categoryWeights": {
+        "航海": 2,
+        "食品": 1.2,
+        "工业": 1.3,
+        "杂物": 1.4,
+        "科技": 1
+      },
+      "tags": [
+        "航海",
+        "食品",
+        "工业",
+        "杂物",
+        "科技"
+      ],
+      "background": "assets/images/maps/custom/shipwreck-hold.png",
+      "categoryMode": "weighted"
+    },
+    {
+      "id": "flea-yard",
+      "tier": 2,
+      "name": "跳蚤旧货场",
+      "hint": "杂货和收藏品混排，稳定产出中低价物，适合熟悉估价节奏。",
+      "ticketCost": 15000,
+      "resourceRoll": [
+        2500,
+        3800,
+        6000,
+        7600
+      ],
+      "rarityWeights": {
+        "junk": 60,
+        "common": 220,
+        "green": 260,
+        "blue": 220,
+        "gold": 90,
+        "red": 45
+      },
+      "categoryWeights": {
+        "杂物": 1.4,
+        "文玩": 1.3,
+        "工业": 1,
+        "玩具": 1.2,
+        "食品": 1,
+        "服饰": 1
+      },
+      "tags": [
+        "杂物",
+        "文玩",
+        "工业",
+        "玩具",
+        "食品",
+        "服饰"
+      ],
+      "background": "assets/images/maps/custom/flea-yard.png",
+      "categoryMode": "weighted"
+    },
+    {
+      "id": "security-cache",
+      "tier": 3,
+      "name": "废弃研究院",
+      "hint": "安防、军品、科技件偏多，蓝金物品的出现率明显提高。",
+      "ticketCost": 40000,
+      "resourceRoll": [
+        4200,
+        6000,
+        8200,
+        10000
+      ],
+      "rarityWeights": {
+        "junk": 30,
+        "common": 160,
+        "green": 240,
+        "blue": 260,
+        "gold": 160,
+        "red": 90
+      },
+      "categoryWeights": {
+        "军品": 1.35,
+        "安防": 1.45,
+        "科技": 1.25,
+        "工业": 1
+      },
+      "tags": [
+        "军品",
+        "安防",
+        "科技",
+        "工业"
+      ],
+      "background": "assets/images/maps/custom/security-cache.png",
+      "categoryMode": "weighted"
+    },
+    {
+      "id": "collector-vault",
+      "tier": 4,
+      "name": "私人收藏库",
+      "hint": "高价文玩、宝石和科技收藏混放，门票高但回报上限更高。",
+      "ticketCost": 90000,
+      "resourceRoll": [
+        6500,
+        8500,
+        10500,
+        13000
+      ],
+      "rarityWeights": {
+        "junk": 20,
+        "common": 120,
+        "green": 220,
+        "blue": 260,
+        "gold": 210,
+        "red": 140
+      },
+      "categoryWeights": {
+        "文玩": 1.4,
+        "宝石": 1.45,
+        "服饰": 1.2,
+        "科技": 1,
+        "家具": 1.2
+      },
+      "tags": [
+        "文玩",
+        "宝石",
+        "服饰",
+        "科技",
+        "家具"
+      ],
+      "background": "assets/images/maps/custom/collector-vault.png",
+      "categoryMode": "weighted"
+    },
+    {
+      "id": "hidden-auction",
+      "tier": 5,
+      "name": "顶级拍卖会",
+      "hint": "最高收益地图，所有品类进入同一池子，稀有物品权重最高。",
+      "ticketCost": 180000,
+      "resourceRoll": [
+        10000,
+        12000,
+        15000,
+        18000
+      ],
+      "rarityWeights": {
+        "junk": 10,
+        "common": 100,
+        "green": 200,
+        "blue": 240,
+        "gold": 220,
+        "red": 200
+      },
+      "categoryMode": "singlePool",
+      "tags": [
+        "文玩",
+        "科技",
+        "载具",
+        "军品",
+        "安防",
+        "宝石",
+        "食品",
+        "工业",
+        "玩具",
+        "杂物",
+        "航海",
+        "服饰",
+        "家具"
+      ],
+      "categoryWeights": {},
+      "background": "assets/images/maps/custom/hidden-auction.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "library-seal",
+      "name": "会员徽章",
+      "w": 1,
+      "h": 1,
+      "rarity": "blue",
+      "value": 27600,
+      "tags": [
+        "文玩",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/library-seal.png"
+    },
+    {
+      "id": "fish-bait",
+      "name": "鱼子酱罐",
+      "w": 1,
+      "h": 1,
+      "rarity": "green",
+      "value": 14300,
+      "tags": [
+        "食品",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/fish-bait.png"
+    },
+    {
+      "id": "air-filter",
+      "name": "空气滤芯",
+      "w": 1,
+      "h": 1,
+      "rarity": "common",
+      "value": 3200,
+      "tags": [
+        "工业",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/air-filter.png"
+    },
+    {
+      "id": "old-book",
+      "name": "三国旧卷",
+      "w": 2,
+      "h": 1,
+      "rarity": "gold",
+      "value": 52700,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/old-book.png"
+    },
+    {
+      "id": "tow-hook",
+      "name": "拖车钩",
+      "w": 1,
+      "h": 1,
+      "rarity": "blue",
+      "value": 24100,
+      "tags": [
+        "载具",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/tow-hook.png"
+    },
+    {
+      "id": "lapis",
+      "name": "青金石",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 85800,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/lapis.png"
+    },
+    {
+      "id": "safe-key",
+      "name": "保险柜钥匙",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 62300,
+      "tags": [
+        "安防",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/safe-key.png"
+    },
+    {
+      "id": "pottery-flute",
+      "name": "陶埙",
+      "w": 1,
+      "h": 2,
+      "rarity": "green",
+      "value": 11700,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/pottery-flute.png"
+    },
+    {
+      "id": "digital-pen",
+      "name": "数位笔",
+      "w": 1,
+      "h": 2,
+      "rarity": "blue",
+      "value": 33600,
+      "tags": [
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/digital-pen.png"
+    },
+    {
+      "id": "driving-recorder",
+      "name": "行车记录仪",
+      "w": 2,
+      "h": 1,
+      "rarity": "blue",
+      "value": 33000,
+      "tags": [
+        "载具",
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/driving-recorder.png"
+    },
+    {
+      "id": "silver-tea-set",
+      "name": "银咖啡具",
+      "w": 4,
+      "h": 2,
+      "rarity": "gold",
+      "value": 61000,
+      "tags": [
+        "文玩",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/silver-tea-set.png"
+    },
+    {
+      "id": "meteorite",
+      "name": "黑钛陨石",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 63200,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/meteorite.png"
+    },
+    {
+      "id": "access-card",
+      "name": "宝宝监护卡",
+      "w": 2,
+      "h": 1,
+      "rarity": "green",
+      "value": 11900,
+      "tags": [
+        "安防"
+      ],
+      "image": "assets/item-textures/custom/access-card.png"
+    },
+    {
+      "id": "bamboo-chair",
+      "name": "金丝楠木椅",
+      "w": 3,
+      "h": 3,
+      "rarity": "red",
+      "value": 157200,
+      "tags": [
+        "家具",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/bamboo-chair.png"
+    },
+    {
+      "id": "pen-holder",
+      "name": "金丝木笔筒",
+      "w": 1,
+      "h": 3,
+      "rarity": "blue",
+      "value": 32100,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/pen-holder.png"
+    },
+    {
+      "id": "wall-ac",
+      "name": "壁挂式空调",
+      "w": 4,
+      "h": 1,
+      "rarity": "blue",
+      "value": 24800,
+      "tags": [
+        "工业"
+      ],
+      "image": "assets/item-textures/custom/wall-ac.png"
+    },
+    {
+      "id": "poster-roll",
+      "name": "藏品漫画",
+      "w": 1,
+      "h": 2,
+      "rarity": "green",
+      "value": 15400,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/poster-roll.png"
+    },
+    {
+      "id": "ruby",
+      "name": "石榴石",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 88600,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/ruby.png"
+    },
+    {
+      "id": "compass",
+      "name": "罗盘仪",
+      "w": 2,
+      "h": 2,
+      "rarity": "red",
+      "value": 135400,
+      "tags": [
+        "航海"
+      ],
+      "image": "assets/item-textures/custom/compass.png"
+    },
+    {
+      "id": "mp5",
+      "name": "MP5冲锋枪",
+      "w": 4,
+      "h": 2,
+      "rarity": "blue",
+      "value": 30200,
+      "tags": [
+        "军品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/mp5.png"
+    },
+    {
+      "id": "sesame-oil",
+      "name": "芝麻香油",
+      "w": 1,
+      "h": 2,
+      "rarity": "green",
+      "value": 9500,
+      "tags": [
+        "食品",
+        "载具"
+      ],
+      "image": "assets/item-textures/custom/sesame-oil.png"
+    },
+    {
+      "id": "alloy-mecha",
+      "name": "合金机甲",
+      "w": 1,
+      "h": 2,
+      "rarity": "red",
+      "value": 121800,
+      "tags": [
+        "玩具",
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/alloy-mecha.png"
+    },
+    {
+      "id": "signed-sneaker",
+      "name": "联名球鞋",
+      "w": 1,
+      "h": 2,
+      "rarity": "blue",
+      "value": 29300,
+      "tags": [
+        "服饰"
+      ],
+      "image": "assets/item-textures/custom/signed-sneaker.png"
+    },
+    {
+      "id": "stock-127",
+      "name": "127子弹盒",
+      "w": 1,
+      "h": 1,
+      "rarity": "green",
+      "value": 13400,
+      "tags": [
+        "军品",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/stock-127.png"
+    },
+    {
+      "id": "cinnamon",
+      "name": "桂皮",
+      "w": 1,
+      "h": 1,
+      "rarity": "green",
+      "value": 8700,
+      "tags": [
+        "食品",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/cinnamon.png"
+    },
+    {
+      "id": "glass-bead",
+      "name": "珊瑚珠",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 51300,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/glass-bead.png"
+    },
+    {
+      "id": "battery",
+      "name": "蓄电池",
+      "w": 2,
+      "h": 3,
+      "rarity": "green",
+      "value": 16600,
+      "tags": [
+        "工业",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/battery.png"
+    },
+    {
+      "id": "clock-goose",
+      "name": "隆中牌钟",
+      "w": 1,
+      "h": 3,
+      "rarity": "red",
+      "value": 135600,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/clock-goose.png"
+    },
+    {
+      "id": "toy-gun",
+      "name": "玩具枪",
+      "w": 1,
+      "h": 1,
+      "rarity": "green",
+      "value": 10700,
+      "tags": [
+        "玩具",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/toy-gun.png"
+    },
+    {
+      "id": "egg-stone",
+      "name": "鹅蛋石",
+      "w": 1,
+      "h": 1,
+      "rarity": "common",
+      "value": 5400,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/egg-stone.png"
+    },
+    {
+      "id": "industrial-water-pump",
+      "name": "工业水泵",
+      "w": 3,
+      "h": 2,
+      "rarity": "blue",
+      "value": 31000,
+      "tags": [
+        "工业",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/industrial-water-pump.png"
+    },
+    {
+      "id": "porcelain-bowl",
+      "name": "曜变天目盏",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 141100,
+      "tags": [
+        "文玩",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/porcelain-bowl.png"
+    },
+    {
+      "id": "recorder-pen",
+      "name": "录音笔",
+      "w": 1,
+      "h": 2,
+      "rarity": "blue",
+      "value": 33600,
+      "tags": [
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/recorder-pen.png"
+    },
+    {
+      "id": "good-ink",
+      "name": "高档墨水",
+      "w": 2,
+      "h": 1,
+      "rarity": "blue",
+      "value": 19900,
+      "tags": [
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/good-ink.png"
+    },
+    {
+      "id": "drone-carrier",
+      "name": "民用垂直起降飞行器",
+      "w": 5,
+      "h": 4,
+      "rarity": "red",
+      "value": 122200,
+      "tags": [
+        "载具",
+        "科技",
+        "巨物"
+      ],
+      "image": "assets/item-textures/custom/drone-carrier.png"
+    },
+    {
+      "id": "drone-small",
+      "name": "折叠无人机",
+      "w": 3,
+      "h": 2,
+      "rarity": "gold",
+      "value": 47800,
+      "tags": [
+        "载具",
+        "科技",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/drone-small.png"
+    },
+    {
+      "id": "server-blade",
+      "name": "刀片服务器",
+      "w": 3,
+      "h": 1,
+      "rarity": "blue",
+      "value": 34200,
+      "tags": [
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/server-blade.png"
+    },
+    {
+      "id": "sealed-ssd",
+      "name": "加密硬盘组",
+      "w": 2,
+      "h": 1,
+      "rarity": "gold",
+      "value": 61900,
+      "tags": [
+        "安防",
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/sealed-ssd.png"
+    },
+    {
+      "id": "medical-case",
+      "name": "密封医疗箱",
+      "w": 2,
+      "h": 2,
+      "rarity": "green",
+      "value": 8700,
+      "tags": [
+        "工业"
+      ],
+      "image": "assets/item-textures/custom/medical-case.png"
+    },
+    {
+      "id": "old-radio",
+      "name": "军用电台",
+      "w": 3,
+      "h": 2,
+      "rarity": "blue",
+      "value": 32000,
+      "tags": [
+        "军品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/old-radio.png"
+    },
+    {
+      "id": "armor-plate",
+      "name": "防弹插板",
+      "w": 2,
+      "h": 3,
+      "rarity": "blue",
+      "value": 31200,
+      "tags": [
+        "军品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/armor-plate.png"
+    },
+    {
+      "id": "nav-console",
+      "name": "舰船导航台",
+      "w": 4,
+      "h": 3,
+      "rarity": "gold",
+      "value": 61300,
+      "tags": [
+        "航海",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/nav-console.png"
+    },
+    {
+      "id": "diving-watch",
+      "name": "潜水腕表",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 52400,
+      "tags": [
+        "航海",
+        "服饰",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/diving-watch.png"
+    },
+    {
+      "id": "wine-crate",
+      "name": "进口酒箱",
+      "w": 3,
+      "h": 2,
+      "rarity": "common",
+      "value": 6900,
+      "tags": [
+        "食品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/wine-crate.png"
+    },
+    {
+      "id": "antique-camera",
+      "name": "老相机",
+      "w": 2,
+      "h": 2,
+      "rarity": "gold",
+      "value": 57500,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/antique-camera.png"
+    },
+    {
+      "id": "stage-costume",
+      "name": "手工戏服",
+      "w": 2,
+      "h": 4,
+      "rarity": "green",
+      "value": 16000,
+      "tags": [
+        "服饰",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/stage-costume.png"
+    },
+    {
+      "id": "gold-mask",
+      "name": "镀金面具",
+      "w": 2,
+      "h": 2,
+      "rarity": "gold",
+      "value": 47400,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/gold-mask.png"
+    },
+    {
+      "id": "jade-token",
+      "name": "玉牌",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 112600,
+      "tags": [
+        "宝石",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/jade-token.png"
+    },
+    {
+      "id": "toolbox",
+      "name": "工具箱",
+      "w": 3,
+      "h": 2,
+      "rarity": "common",
+      "value": 7100,
+      "tags": [
+        "工业",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/toolbox.png"
+    },
+    {
+      "id": "empty-case",
+      "name": "空木盒",
+      "w": 3,
+      "h": 2,
+      "rarity": "junk",
+      "value": 900,
+      "tags": [
+        "杂物",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/empty-case.png"
+    },
+    {
+      "id": "broken-cloth",
+      "name": "残破幕布",
+      "w": 3,
+      "h": 2,
+      "rarity": "junk",
+      "value": 2000,
+      "tags": [
+        "杂物",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/broken-cloth.png"
+    },
+    {
+      "id": "old-coin",
+      "name": "古币",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 61200,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/old-coin.png"
+    },
+    {
+      "id": "collector-album",
+      "name": "收藏卡册",
+      "w": 3,
+      "h": 3,
+      "rarity": "gold",
+      "value": 73600,
+      "tags": [
+        "文玩",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/collector-album.png"
+    },
+    {
+      "id": "tactical-helmet",
+      "name": "战术头盔",
+      "w": 2,
+      "h": 2,
+      "rarity": "blue",
+      "value": 25700,
+      "tags": [
+        "安防",
+        "军品"
+      ],
+      "image": "assets/item-textures/custom/tactical-helmet.png"
+    },
+    {
+      "id": "good-scope",
+      "name": "高精度瞄准镜",
+      "w": 2,
+      "h": 1,
+      "rarity": "red",
+      "value": 111200,
+      "tags": [
+        "安防",
+        "军品"
+      ],
+      "image": "assets/item-textures/custom/good-scope.png"
+    },
+    {
+      "id": "portable-generator",
+      "name": "便携发电机",
+      "w": 3,
+      "h": 3,
+      "rarity": "common",
+      "value": 3500,
+      "tags": [
+        "工业",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/portable-generator.png"
+    },
+    {
+      "id": "bronze-buddha",
+      "name": "鎏金铜佛",
+      "w": 2,
+      "h": 3,
+      "rarity": "gold",
+      "value": 49900,
+      "tags": [
+        "文玩",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/bronze-buddha.png"
+    },
+    {
+      "id": "guitar-case",
+      "name": "旧吉他箱",
+      "w": 5,
+      "h": 2,
+      "rarity": "green",
+      "value": 9800,
+      "tags": [
+        "文玩",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/guitar-case.png"
+    },
+    {
+      "id": "sniper-case",
+      "name": "长条武器箱",
+      "w": 5,
+      "h": 2,
+      "rarity": "gold",
+      "value": 42900,
+      "tags": [
+        "军品"
+      ],
+      "image": "assets/item-textures/custom/sniper-case.png"
+    },
+    {
+      "id": "old-arcade",
+      "name": "复古街机",
+      "w": 4,
+      "h": 4,
+      "rarity": "red",
+      "value": 105100,
+      "tags": [
+        "科技",
+        "玩具",
+        "巨物"
+      ],
+      "image": "assets/item-textures/custom/good-arcade.png"
+    },
+    {
+      "id": "sealed-watch-box",
+      "name": "密封名表盒",
+      "w": 2,
+      "h": 2,
+      "rarity": "red",
+      "value": 153000,
+      "tags": [
+        "服饰"
+      ],
+      "image": "assets/item-textures/custom/sealed-watch-box.png"
+    },
+    {
+      "id": "cash-brick",
+      "name": "藏品旧钞",
+      "w": 1,
+      "h": 1,
+      "rarity": "gold",
+      "value": 42600,
+      "tags": [
+        "文物",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/cash-brick.png"
+    },
+    {
+      "id": "lab-analyzer",
+      "name": "实验分析仪",
+      "w": 4,
+      "h": 3,
+      "rarity": "blue",
+      "value": 25800,
+      "tags": [
+        "工业",
+        "科技",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/lab-analyzer.png"
+    },
+    {
+      "id": "textile-roll",
+      "name": "布料卷",
+      "w": 1,
+      "h": 4,
+      "rarity": "common",
+      "value": 4800,
+      "tags": [
+        "服饰"
+      ],
+      "image": "assets/item-textures/custom/textile-roll.png"
+    },
+    {
+      "id": "engine-block",
+      "name": "发动机缸体",
+      "w": 4,
+      "h": 3,
+      "rarity": "junk",
+      "value": 2000,
+      "tags": [
+        "载具",
+        "杂物",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/engine-block.png"
+    },
+    {
+      "id": "tactical-backpack",
+      "name": "战术背包",
+      "w": 3,
+      "h": 4,
+      "rarity": "green",
+      "value": 16300,
+      "tags": [
+        "安防",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/tactical-backpack.png"
+    },
+    {
+      "id": "cracked-stone-lion",
+      "name": "裂纹石像",
+      "w": 2,
+      "h": 4,
+      "rarity": "junk",
+      "value": 1900,
+      "tags": [
+        "杂物",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/cracked-stone-lion.png"
+    },
+    {
+      "id": "wire-spool",
+      "name": "工业线缆卷",
+      "w": 2,
+      "h": 3,
+      "rarity": "common",
+      "value": 6700,
+      "tags": [
+        "工业",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/wire-spool.png"
+    },
+    {
+      "id": "folded-tent",
+      "name": "折叠帐篷",
+      "w": 3,
+      "h": 2,
+      "rarity": "common",
+      "value": 6700,
+      "tags": [
+        "军品",
+        "航海",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/folded-tent.png"
+    },
+    {
+      "id": "oil-canister",
+      "name": "密封机油桶",
+      "w": 2,
+      "h": 2,
+      "rarity": "common",
+      "value": 6700,
+      "tags": [
+        "载具"
+      ],
+      "image": "assets/item-textures/custom/oil-canister.png"
+    },
+    {
+      "id": "old-keyboard",
+      "name": "老式键盘",
+      "w": 2,
+      "h": 1,
+      "rarity": "common",
+      "value": 2800,
+      "tags": [
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/old-keyboard.png"
+    },
+    {
+      "id": "ration-box",
+      "name": "野战口粮箱",
+      "w": 3,
+      "h": 2,
+      "rarity": "common",
+      "value": 5600,
+      "tags": [
+        "食品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/ration-box.png"
+    },
+    {
+      "id": "coffee-machine",
+      "name": "商用咖啡机",
+      "w": 3,
+      "h": 2,
+      "rarity": "common",
+      "value": 5700,
+      "tags": [
+        "食品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/coffee-machine.png"
+    },
+    {
+      "id": "ceramic-vase",
+      "name": "青釉花瓶",
+      "w": 2,
+      "h": 3,
+      "rarity": "green",
+      "value": 9900,
+      "tags": [
+        "文玩",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/ceramic-vase.png"
+    },
+    {
+      "id": "climbing-rope",
+      "name": "登山绳包",
+      "w": 1,
+      "h": 3,
+      "rarity": "green",
+      "value": 9000,
+      "tags": [
+        "航海"
+      ],
+      "image": "assets/item-textures/custom/climbing-rope.png"
+    },
+    {
+      "id": "repair-kit",
+      "name": "车辆维修包",
+      "w": 2,
+      "h": 2,
+      "rarity": "green",
+      "value": 11200,
+      "tags": [
+        "载具"
+      ],
+      "image": "assets/item-textures/custom/repair-kit.png"
+    },
+    {
+      "id": "tactical-vest",
+      "name": "战术背心",
+      "w": 2,
+      "h": 3,
+      "rarity": "green",
+      "value": 10600,
+      "tags": [
+        "安防",
+        "军品",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/tactical-vest.png"
+    },
+    {
+      "id": "encrypted-router",
+      "name": "加密路由器",
+      "w": 2,
+      "h": 2,
+      "rarity": "blue",
+      "value": 22700,
+      "tags": [
+        "安防",
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/encrypted-router.png"
+    },
+    {
+      "id": "mini-projector",
+      "name": "微型投影仪",
+      "w": 2,
+      "h": 1,
+      "rarity": "blue",
+      "value": 29400,
+      "tags": [
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/mini-projector.png"
+    },
+    {
+      "id": "microscope",
+      "name": "实验显微镜",
+      "w": 2,
+      "h": 3,
+      "rarity": "blue",
+      "value": 29800,
+      "tags": [
+        "工业",
+        "军品",
+        "科技",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/microscope.png"
+    },
+    {
+      "id": "carbon-bike-frame",
+      "name": "碳纤车架",
+      "w": 4,
+      "h": 2,
+      "rarity": "blue",
+      "value": 27600,
+      "tags": [
+        "载具",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/carbon-bike-frame.png"
+    },
+    {
+      "id": "night-vision",
+      "name": "夜视单筒镜",
+      "w": 2,
+      "h": 1,
+      "rarity": "gold",
+      "value": 67800,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/night-vision.png"
+    },
+    {
+      "id": "antique-sword",
+      "name": "古代仪仗剑",
+      "w": 4,
+      "h": 1,
+      "rarity": "gold",
+      "value": 42500,
+      "tags": [
+        "文玩"
+      ],
+      "image": "assets/item-textures/custom/antique-sword.png"
+    },
+    {
+      "id": "pearl-necklace",
+      "name": "珍珠项链",
+      "w": 1,
+      "h": 2,
+      "rarity": "gold",
+      "value": 43800,
+      "tags": [
+        "宝石",
+        "服饰"
+      ],
+      "image": "assets/item-textures/custom/pearl-necklace.png"
+    },
+    {
+      "id": "jade-screen",
+      "name": "玉雕屏风",
+      "w": 3,
+      "h": 3,
+      "rarity": "red",
+      "value": 134400,
+      "tags": [
+        "宝石",
+        "大件"
+      ],
+      "image": "assets/item-textures/custom/jade-screen.png"
+    },
+    {
+      "id": "rare-game-cartridge",
+      "name": "首版游戏卡带",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 123600,
+      "tags": [
+        "玩具",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/rare-game-cartridge.png"
+    },
+    {
+      "id": "sapphire-ring",
+      "name": "蓝宝石戒指",
+      "w": 1,
+      "h": 1,
+      "rarity": "red",
+      "value": 88200,
+      "tags": [
+        "宝石",
+        "服饰",
+        "小件"
+      ],
+      "image": "assets/item-textures/custom/sapphire-ring.png"
+    },
+    {
+      "id": "flight-recorder",
+      "name": "飞行记录器",
+      "w": 2,
+      "h": 2,
+      "rarity": "red",
+      "value": 106200,
+      "tags": [
+        "载具",
+        "科技"
+      ],
+      "image": "assets/item-textures/custom/flight-recorder.png"
+    }
+  ],
+  "warehouses": [
+    {
+      "id": "trophy-mixed",
+      "name": "战利品混合仓",
+      "hint": "高低价值物品混放，偶尔出现超大件拍品。",
+      "tags": [
+        "文玩",
+        "科技",
+        "载具",
+        "军品",
+        "宝石",
+        "食品",
+        "工业",
+        "玩具",
+        "杂物"
+      ]
+    },
+    {
+      "id": "tech-salvage",
+      "name": "无人机维修仓",
+      "hint": "科技、车辆与工业零件偏多，价值波动较大。",
+      "tags": [
+        "科技",
+        "载具",
+        "工业"
+      ]
+    },
+    {
+      "id": "antique-backroom",
+      "name": "古玩街后台仓",
+      "hint": "文玩、宝石和旧藏品较多，小件高价值物常见。",
+      "tags": [
+        "文玩",
+        "宝石",
+        "服饰"
+      ]
+    },
+    {
+      "id": "security-locker",
+      "name": "废弃安保仓",
+      "hint": "军品、安防和工业件混放，大件占格较多。",
+      "tags": [
+        "军品",
+        "安防",
+        "工业",
+        "科技"
+      ]
+    },
+    {
+      "id": "port-unclaimed",
+      "name": "港口无人认领箱",
+      "hint": "航海、食品和杂物偏多，也可能混入高价科技件。",
+      "tags": [
+        "航海",
+        "食品",
+        "工业",
+        "科技",
+        "杂物"
+      ]
+    },
+    {
+      "id": "garage-sweep",
+      "name": "车库清仓批次",
+      "hint": "车辆、工业件和长条大件很多，排列密度高但收益波动明显。",
+      "tags": [
+        "载具",
+        "工业",
+        "安防",
+        "杂物"
+      ]
+    },
+    {
+      "id": "collector-lab",
+      "name": "私人实验室仓",
+      "hint": "科技、安防和收藏物混放，常有小件高价值藏品穿插其中。",
+      "tags": [
+        "科技",
+        "安防",
+        "文玩",
+        "服饰"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description=King of Du browser auction game
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/king-of-du
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+Environment=KWA_DATA_DIR=/var/lib/king-of-du
+Environment=COOKIE_SECURE=true
+Environment=ADMIN_TOKEN=replace-with-a-long-random-token
+ExecStart=/usr/bin/node src/server.js
+Restart=always
+RestartSec=3
+User=kingofdu
+Group=kingofdu
+
+[Install]
+WantedBy=multi-user.target

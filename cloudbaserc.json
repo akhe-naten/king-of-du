@@ -1,0 +1,8 @@
+{
+  "version": "2.0",
+  "envId": "webtest-d9g4cjnu907b00c84",
+  "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+  "cloudrun": {
+    "name": "kingofpai"
+  }
+}

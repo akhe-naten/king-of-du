@@ -1,0 +1,17 @@
+{
+  "name": "warehouse-auction-night",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A browser-playable warehouse auction party game prototype.",
+  "scripts": {
+    "start": "node src/server.js",
+    "play": "node scripts/run-game.js",
+    "admin": "node scripts/run-admin.js",
+    "package": "node scripts/make-portable.js",
+    "check": "node --check public/js/app.js && node --check public/js/admin.js && node --check src/server.js && node --check scripts/selftest-server.js && node --check scripts/run-admin.js && node --check scripts/run-game.js && node --check scripts/make-portable.js",
+    "selftest": "node scripts/selftest-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
